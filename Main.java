@@ -30,6 +30,7 @@ public class Main {
     }
 
     public static double getMediana (int [] v){
+        bubbleSort(v);
         int mediana = 0;
         if (v.length%2==0){
             mediana = (v[v.length/2-1] + v[v.length/2]) / 2; 
