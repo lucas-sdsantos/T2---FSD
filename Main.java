@@ -4,9 +4,9 @@ public class Main {
         int [] v = new int [5];
         v[0] = 8;
         v[1] = 1;
-        v[2]=1;
-        v[3]= 44;
-        v[4]= 100;
+        v[2] = 1;
+        v[3] = 44;
+        v[4] = 100;
         System.out.println (getMedia(v));
         System.out.println(getMediana(v));
         System.out.println (getModa(v));
@@ -14,8 +14,8 @@ public class Main {
     }
     
     public static double getMedia (int [] v){
-        double soma = 0.0;
-        double media = 0.0;
+        int soma = 0;
+        int media = 0;
         int count = 0;
         
         for (int i = 0; i<v.length; i++){
@@ -30,9 +30,9 @@ public class Main {
     }
 
     public static double getMediana (int [] v){
-        double mediana = 0.0;
+        int mediana = 0;
         if (v.length%2==0){
-            mediana = v[(v.length/2)] + v[(v.length/2)+1];
+            mediana = (v[v.length/2-1] + v[v.length/2]) / 2; 
             return mediana;
         }
         else{
