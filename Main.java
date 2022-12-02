@@ -52,7 +52,6 @@ public class Main {
                 if (v[j]==v[i]){
                     count ++;
                 }
-
             }
             if (count > maxCount){
                 maxCount = count;
@@ -69,7 +68,7 @@ public class Main {
                     if (arr[j] > arr[j + 1]) {
                         // swap arr[j+1] and arr[j]
                         int temp = arr[j];
-                        arr[j] = arr[j + 1];
+                        arr[j] = arr[j + 1];    
                         arr[j + 1] = temp;
                     }
     }
