@@ -22,7 +22,7 @@ public class Main {
         System.out.println(media);
 
         //System.out.println (getMedia(v));
-        //System.out.println(getMediana(v));
+        System.out.println(getMediana(v));
         //System.out.println (getModa(v));
 
     }
