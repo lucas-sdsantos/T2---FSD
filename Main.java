@@ -1,7 +1,8 @@
 public class Main {
 
     public static void main (String args[]){
-        int [] v = {1, 19, 10, 5, 17, 8, 9, 20, 19, 11, 3, 10, 2, 20};
+        //int [] v = {1, 19, 10, 5, 17, 8, 9, 20, 19, 11, 3, 10, 2, 20};
+        int[] v = {5, 14, 17, 4, 12, 11, 9, 5, 2, 1, 16, 4, 8};
         int n = v.length;
         int mediana = 0;
         int media = 0;
