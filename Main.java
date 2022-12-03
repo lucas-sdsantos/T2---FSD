@@ -1,19 +1,32 @@
 public class Main {
 
     public static void main (String args[]){
-        int [] v = new int [5];
-        v[0] = 8;
-        v[1] = 1;
-        v[2] = 1;
-        v[3] = 44;
-        v[4] = 100;
-        System.out.println (getMedia(v));
-        System.out.println(getMediana(v));
-        System.out.println (getModa(v));
+        int [] v = {1, 19, 10, 5, 17, 8, 9, 20, 19, 11, 3, 10, 2, 20};
+        int n = v.length;
+        int mediana = 0;
+        int media = 0;
+        int moda = 0;
+        int vezes = 0;
+
+        int i = 0;
+        int somatorio = 0;
+
+        while(i < n) {
+            int temp = v[i];
+            somatorio = somatorio + temp;
+            i = i + 1;
+        }
+        int divisor = n;
+        media = somatorio / divisor;
+        System.out.println(media);
+
+        //System.out.println (getMedia(v));
+        //System.out.println(getMediana(v));
+        //System.out.println (getModa(v));
 
     }
     
-    public static double getMedia (int [] v){
+    /*public static int getMedia (int [] v){
         int soma = 0;
         int media = 0;
         int count = 0;
@@ -27,9 +40,9 @@ public class Main {
         media = soma/count;
         return media;
         
-    }
+    }*/
 
-    public static double getMediana (int [] v){
+    public static int getMediana (int [] v){
         bubbleSort(v);
         int mediana = 0;
         if (v.length%2==0){
