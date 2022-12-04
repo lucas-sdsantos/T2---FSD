@@ -6,6 +6,7 @@ main:   la  $s1, vet         # coloca vet em $s1
 	lw  $s0,0($s0)       # coloca n em $s0
 	xor $t9, $t9, $t9    # inicia o somatorio dos valores em zero
 	xor $s4, $s4, $s4    # inicia i = 0
+	j   mod
 	
 soma:   beq  $s4, $s0, med 
 	sll  $t8, $s4, 2     # $t1 = i * 4 : para endereÃƒÂ§ar vet
@@ -84,7 +85,7 @@ medi:   srl  $t0, $s0, 1      # $t0 = n / 2
 	lw   $t3  0($t2)      # pega o valor endereçado no meio do vetor
 	la   $t4, mediana     
 	sw   $t3, 0($t4)      # grava o valor na mediana
-	j    fim
+	j    mod
 
 par:    sll  $t2, $t0, 2      # t0*4 para endereçar o vet
 	add  $t2, $t2, $s1    # edereça o vet[n/2]
@@ -95,9 +96,54 @@ par:    sll  $t2, $t0, 2      # t0*4 para endereçar o vet
 	srl  $t6, $t6, 1      # divide os valores por 2
 	la   $t7, mediana     
 	sw   $t6, 0($t7)      # grava o valor na mediana
-	j    fim
+	j    mod
 
-mod:    
+mod:    #xor  $t9, $t9, $t9     # inicia moda atual em 0
+	#xor  $t8, $t8, $t8     # inicia n moda atual em 0
+	xor  $s2, $s2, $s2     # inicia moda atual em 0
+	xor  $s3, $s3, $s3     # inicia n moda atual em 0
+	xor  $t0, $t0, $t0     # i = 0 
+	j    l1i
+
+l1i:    beq  $t0, $s0, mod2    # termina o loop se i = n
+	xor  $t9, $t9, $t9     # inicia moda atual em 0
+	xor  $t8, $t8, $t8     # inicia n moda atual em 0
+	sll  $t1, $t0, 2       # $t1 = i * 4 : para endereçar vet
+        add  $t1, $t1, $s1     # $t1 = address of vet[i]
+        lw   $t2, 0($t1)       # $t2 = vet[i]
+        xor  $t3, $t3, $t3     # j = 0
+        j    l2i
+
+l2i:    beq  $t3, $s0, inc
+	sll  $t4, $t3, 2       # $t4 = j * 4 : para endereçar vet
+        add  $t4, $t4, $s1     # $t4 = address of vet[j]
+        lw   $t5, 0($t4)       # $t5 = vet[j]
+        beq  $t5, $t2, up      # se vet[j] = vet[i], atualiza o contador
+        addi $t3, $t3, 1
+        
+inc:    addi $t0, $t0, 1
+	j    l1i
+       
+up:     addi $t8, $t8, 1
+        blt  $s3, $t8, atlz
+        addi $t3, $t3, 1
+        j    l2i
+       
+atlz:   add  $s2, $t2, $0
+        add  $s3, $t8, $0
+        addi $t3, $t3, 1
+        j    l2i
+
+mod2:   la   $t0, moda
+	sw   $s2, 0($t0)
+	la   $t1, vezes
+	sw   $s3, 0($t1)
+	j    fim
+       
+         
+
+        
+	
 
 .data
 n:        .word 14
@@ -105,4 +151,5 @@ mediana:  .word 0
 media:    .word 0
 moda:     .word 0       
 vezes:    .word 0
-vet:      .word 1 19 10 5 17 8 9 20 19 11 3 10 2 20
+vet:      .word 1 1 1 1 1 1 1 1 19 11 3 10 2 20
+#vet:      .word 1 19 10 5 17 8 9 20 19 11 3 10 2 20
